@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+/* Form controls shared by every tab (including projected filters). */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+select,
+input,
+button {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+input[type='number'] {
+  width: 6rem;
+}
