@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.warframe.market",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" },
+    "headers": { "Platform": "pc" }
+  }
+}
