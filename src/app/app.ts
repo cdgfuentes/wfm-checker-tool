@@ -11,6 +11,7 @@ export class App {
   // new syndicate tab? add it here AND in app.routes.ts, dont forget!!
   protected readonly tabs = [
     { path: '/holdfast', label: 'Holdfast' },
+    { path: '/cavia', label: 'Cavia' },
     { path: '/hex', label: 'The Hex' },
   ];
 }

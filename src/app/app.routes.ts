@@ -9,6 +9,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/holdfast/holdfast').then((m) => m.Holdfast),
   },
   {
+    path: 'cavia',
+    title: 'Cavia',
+    loadComponent: () => import('./pages/cavia/cavia').then((m) => m.Cavia),
+  },
+  {
     path: 'hex',
     title: 'The Hex',
     loadComponent: () => import('./pages/hex/hex').then((m) => m.Hex),
