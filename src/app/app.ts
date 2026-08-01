@@ -9,7 +9,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class App {
   // new syndicate tab? add it here AND in app.routes.ts, dont forget!!
+  protected readonly version = '0.1.0'; // idk if we need this??
   protected readonly tabs = [
+    { path: '/augments', label: 'Augments' },
     { path: '/holdfast', label: 'Holdfast' },
     { path: '/cavia', label: 'Cavia' },
     { path: '/hex', label: 'The Hex' },

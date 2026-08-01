@@ -22,6 +22,6 @@ describe('App', () => {
     const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelector('h1')?.textContent).toContain('Syndicate Trade Checker');
     const tabs = [...el.querySelectorAll('.tabs a')].map((a) => a.textContent?.trim());
-    expect(tabs).toEqual(['Holdfast', 'Cavia', 'The Hex']);
+    expect(tabs).toEqual(['Augments', 'Holdfast', 'Cavia', 'The Hex']);
   });
 });

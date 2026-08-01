@@ -2,7 +2,12 @@ import { Routes } from '@angular/router';
 
 // lazy loaded so the first load stays gamay
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'holdfast' },
+  { path: '', pathMatch: 'full', redirectTo: 'augments' },
+  {
+    path: 'augments',
+    title: 'Augments',
+    loadComponent: () => import('./pages/augments/augments').then((m) => m.Augments),
+  },
   {
     path: 'holdfast',
     title: 'Holdfast',
@@ -18,5 +23,5 @@ export const routes: Routes = [
     title: 'The Hex',
     loadComponent: () => import('./pages/hex/hex').then((m) => m.Hex),
   },
-  { path: '**', redirectTo: 'holdfast' },
+  { path: '**', redirectTo: 'augments' },
 ];
