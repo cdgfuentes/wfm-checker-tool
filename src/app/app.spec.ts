@@ -16,12 +16,12 @@ describe('App', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render the title and the tab', async () => {
+  it('should render the title and both tabs', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const el = fixture.nativeElement as HTMLElement;
     expect(el.querySelector('h1')?.textContent).toContain('Syndicate Trade Checker');
     const tabs = [...el.querySelectorAll('.tabs a')].map((a) => a.textContent?.trim());
-    expect(tabs).toEqual(['The Hex']);
+    expect(tabs).toEqual(['Holdfast', 'The Hex']);
   });
 });

@@ -8,7 +8,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
 })
 export class App {
+  // new syndicate tab? add it here AND in app.routes.ts, dont forget!!
   protected readonly tabs = [
+    { path: '/holdfast', label: 'Holdfast' },
     { path: '/hex', label: 'The Hex' },
   ];
 }
