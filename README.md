@@ -61,5 +61,19 @@ functions/api          the live proxy
 - the best sellers table uses the old **v1** api for sales stats. warframe.market says v1 is deprecated, so that part might just stop working one day (scanning uses v2, that one is fine)
 - item lists are hand picked from the wiki. if a syndicate changes its stock, update `data/`
 
+## credits
+
+this app is only possible because of these, tttthank you!!
+
+| what                  | who                 | link                                            | used for                                      |
+| --------------------- | ------------------- | ----------------------------------------------- | --------------------------------------------- |
+| market data           | warframe.market     | https://warframe.market                         | buyer orders (v2) and sales stats (v1)        |
+| api docs              | warframe.market     | https://docs.warframe.market/docs/api/overview/ | how the api works, the 3 requests a sec limit |
+| what syndicates sell  | Warframe Wiki       | https://wiki.warframe.com                       | the item lists in `data/`                     |
+| augment and mod names | WFCD warframe-items | https://github.com/WFCD/warframe-items          | the augment list                              |
+| the game              | Digital Extremes    | https://www.warframe.com                        | Warframe itself                               |
+| framework             | Angular             | https://angular.dev                             | the whole app                                 |
+| hosting               | Cloudflare Pages    | https://pages.cloudflare.com                    | hosting + the proxy function                  |
+
 am not affiliated with or endorsed by warframe.market or DE
 Warframe and everything in it belongs to Digital Extremes
