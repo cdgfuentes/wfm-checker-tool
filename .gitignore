@@ -45,3 +45,6 @@ Thumbs.db
 
 # Cloudflare local dev cache
 /.wrangler
+
+# Vercel local link
+/.vercel

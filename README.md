@@ -18,7 +18,7 @@ small angular app i made so I can turn syndicate standing into plat. it checks w
 4. every buyer gets one whisper with all their items in it. hit copy, paste it in game, done
 5. results stay when you switch tabs so no need to wait again
 
-why the `/api` ? warframe.market doesnt allow browsers to call it directly (no cors). so the app calls `/api/...` and a tiny proxy forwards it. in dev thats `proxy.conf.json`, live its `worker/index.ts` (a Cloudflare Worker). it only lets 2 routes through (order lookup and sales stats) and caches the replies for a bit.
+why the `/api` ? warframe.market doesnt allow browsers to call it directly (no cors). so the app calls `/api/...` and a tiny proxy forwards it. in dev thats `proxy.conf.json`, live its the functions in `api/` (vercel). it only lets 2 routes through (order lookup and sales stats) and caches the replies for a bit.
 
 ## run it
 
@@ -29,17 +29,17 @@ npm test
 ```
 
 - needs Node 22.12 or newer
-- `.npmrc` turns on `legacy-peer-deps` cause plain `npm install` crashed on my machine (some npm `edgesOut` bug). cloudflare needs it too or `npm ci` says the lockfile is out of sync
+- `.npmrc` turns on `legacy-peer-deps` cause plain `npm install` crashed on my machine (some npm `edgesOut` bug). vercel needs it too or `npm ci` says the lockfile is out of sync
 
-## put it online (cloudflare workers)
+## put it online (vercel)
 
-cloudflare calls these "workers" now (the url ends in `workers.dev`). connect the github repo in the dashboard and set:
+1. push the repo to github
+2. on vercel: add new project, pick the repo, leave the settings alone (`vercel.json` has the build command and output folder)
+3. deploy. every push to the branch you pick redeploys
 
-- build command: `npm run build`
-- deploy command: `npx wrangler deploy` (the default one)
-- node version: `.node-version` says 22. if the build still picks an old one, add `NODE_VERSION=22` in the settings
+the `api/` folder turns into the proxy on its own, and `vercel.json` sends unknown urls to `index.html` so a refresh on `/hex` works.
 
-`wrangler.jsonc` does the rest: it points at the angular build (`dist/wfm-checker/browser`), sends unknown urls to `index.html` so a refresh on `/hex` works, and only sends `/api/*` to the worker.
+i tried cloudflare workers first but warframe.market answers them with a 403 bot check. a normal connection is fine, so the proxy lives on vercel instead.
 
 ## adding a new tab
 
@@ -56,8 +56,7 @@ src/app
   models               types
   pages                one small page per tab
   services             api calls + per tab scan / price state
-worker                 the live proxy (cloudflare worker)
-wrangler.jsonc         cloudflare config
+api                    the live proxy (vercel functions)
 ```
 
 ## notes
@@ -77,7 +76,7 @@ this app is only possible because of these, tttthank you!!
 | augment and mod names | WFCD warframe-items | https://github.com/WFCD/warframe-items          | the augment list                              |
 | the game              | Digital Extremes    | https://www.warframe.com                        | Warframe itself                               |
 | framework             | Angular             | https://angular.dev                             | the whole app                                 |
-| hosting               | Cloudflare Workers  | https://workers.cloudflare.com                  | hosting + the proxy                           |
+| hosting               | Vercel              | https://vercel.com                              | hosting + the proxy                           |
 
 am not affiliated with or endorsed by warframe.market or DE
 Warframe and everything in it belongs to Digital Extremes

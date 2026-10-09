@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/wfm-checker/browser",
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+}
