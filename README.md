@@ -23,13 +23,13 @@ why the `/api` ? warframe.market doesnt allow browsers to call it directly (no c
 ## run it
 
 ```
-npm install --legacy-peer-deps
+npm install
 npm start        # http://localhost:4200
 npm test
 ```
 
 - needs Node 22.12 or newer
-- `--legacy-peer-deps` cause plain `npm install` crashed on my machine (some npm `edgesOut` bug)
+- `.npmrc` turns on `legacy-peer-deps` cause plain `npm install` crashed on my machine (some npm `edgesOut` bug). cloudflare needs it too or `npm ci` says the lockfile is out of sync
 
 ## put it online (cloudflare pages)
 
