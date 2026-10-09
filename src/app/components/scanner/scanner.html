@@ -1,0 +1,152 @@
+@let s = session();
+@let st = stats();
+
+@if (loadStats()) {
+  <section class="top">
+    <div class="top-head">
+      <h2>Best sellers</h2>
+      <span class="sub">sold in the last 48h</span>
+      <button type="button" class="secondary" [disabled]="st.loading()" (click)="refreshStats()">
+        Refresh
+      </button>
+    </div>
+    @if (st.loading()) {
+      <p class="sub">checking prices, {{ st.progress().done }} / {{ st.progress().total }}</p>
+    }
+    @if (st.top().length) {
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Sells for</th>
+              <th>Sold</th>
+              @if (topHasUnranked()) {
+                <th>Unranked</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (r of st.top(); track r.name) {
+              <tr>
+                <td>{{ r.name }}</td>
+                <td>
+                  {{ r.price }}p
+                  @if (r.rank) {
+                    <span class="sub">(rank {{ r.rank }})</span>
+                  }
+                </td>
+                <td>{{ r.volume }}</td>
+                @if (topHasUnranked()) {
+                  <td>{{ r.unrankedPrice === null ? '-' : r.unrankedPrice + 'p' }}</td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+}
+
+<section class="controls">
+  <ng-content />
+  <label class="field">
+    Min platinum
+    <input type="number" min="1" [ngModel]="s.minPlat()" (ngModelChange)="s.minPlat.set($event)" />
+    @if (suggestedMin(); as n) {
+      <button
+        type="button"
+        class="link"
+        title="a bit under the typical sale price, buyers usually offer less than stuff sells for"
+        (click)="s.minPlat.set(n)"
+      >
+        suggested: {{ n }}p
+      </button>
+    }
+  </label>
+  <label class="field">
+    Buyer status
+    <select [ngModel]="s.status()" (ngModelChange)="s.status.set($event)">
+      <option value="ingame">In game only</option>
+      <option value="online">Online + in game</option>
+    </select>
+  </label>
+  @if (showRank()) {
+    <label class="field">
+      Rank
+      <select [ngModel]="s.rank()" (ngModelChange)="s.rank.set($event)">
+        <option value="any">Any rank</option>
+        <option value="unranked">Unranked only</option>
+      </select>
+    </label>
+  }
+  @if (s.running()) {
+    <button type="button" class="secondary" (click)="s.cancel()">Cancel</button>
+  } @else {
+    <button type="button" (click)="scan()">Scan {{ items().length }} items</button>
+  }
+</section>
+
+@if (s.running()) {
+  <progress [value]="s.progress().done" [max]="s.progress().total"></progress>
+  <p class="sub">{{ s.progress().done }} / {{ s.progress().total }} checked</p>
+}
+
+@if (s.errors().length) {
+  <details class="errors">
+    <summary>{{ s.errors().length }} failed to load</summary>
+    <ul>
+      @for (e of s.errors(); track e.slug) {
+        <li>{{ e.name }} ({{ e.group }}): {{ e.message }}</li>
+      }
+    </ul>
+  </details>
+}
+
+@if (s.sortedHits().length) {
+  <h2>{{ s.sortedHits().length }} buyers found</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Buyer</th>
+          <th>Offer</th>
+          @if (hasRank()) {
+            <th>Rank</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (h of s.sortedHits(); track $index) {
+          <tr>
+            <td>{{ h.name }}</td>
+            <td>
+              {{ h.buyer }}
+              @if (h.status === 'ingame') {
+                <span class="dot" title="In game"></span>
+              }
+            </td>
+            <td>{{ h.platinum }}p</td>
+            @if (hasRank()) {
+              <td>{{ h.rank || 'Unranked' }}</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Whisper lines</h2>
+  @for (line of whispers(); track line) {
+    <div class="whisper">
+      <code>{{ line }}</code>
+      <button type="button" (click)="copy(line)">
+        {{ copied() === line ? 'Copied!' : copyFailed() === line ? 'Cant copy' : 'Copy' }}
+      </button>
+    </div>
+  }
+} @else if (s.hasRun() && !s.running()) {
+  <p>no buyers atm</p>
+}
