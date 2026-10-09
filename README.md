@@ -7,12 +7,12 @@ small angular app i made so I can turn syndicate standing into plat. it checks w
 - one tab per syndicate (Augments, Holdfast, Cavia, The Hex)
 - **best sellers**: what sold for the most in the last 48h
 - **scan**: finds buyers that are online or in game
-- **suggested min plat** so you dont start from zero
+- **suggested min plat** is turned off for now (wip)
 - **whisper lines**, one per buyer, with a copy button
 
 ## how it works (quick overview)
 
-1. open a tab. it grabs recent sales for that tab's items, thats the best sellers table and the suggested min plat
+1. open a tab. it grabs recent sales for that tab's items, thats the best sellers table
 2. hit scan. it asks warframe.market for the top buyers of every item, one request every 350ms (the api only allows 3 a sec)
 3. buyers that are online or in game and offer at least your min plat show up, best offer first
 4. every buyer gets one whisper with all their items in it. hit copy, paste it in game, done

@@ -48,12 +48,13 @@ export class Scanner {
     });
   });
 
-  // follows the rank filter, unranked sells for way less so the suggestion drops too
-  protected readonly suggestedMin = computed(() =>
-    this.loadStats()
-      ? this.stats().suggestedMin(this.showRank() && this.session().rank() === 'unranked')
-      : null,
-  );
+  // temporary removed.. unstable and needs more work. so WIP
+  // // follows the rank filter, unranked sells for way less so the suggestion drops too
+  // protected readonly suggestedMin = computed(() =>
+  //   this.loadStats()
+  //     ? this.stats().suggestedMin(this.showRank() && this.session().rank() === 'unranked')
+  //     : null,
+  // );
 
   protected readonly topHasUnranked = computed(() =>
     this.stats()

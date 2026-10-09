@@ -54,6 +54,7 @@
   <label class="field">
     Min platinum
     <input type="number" min="1" [ngModel]="s.minPlat()" (ngModelChange)="s.minPlat.set($event)" />
+    <!-- temporary removed.. unstable and needs more work. so WIP
     @if (suggestedMin(); as n) {
       <button
         type="button"
@@ -64,6 +65,7 @@
         suggested: {{ n }}p
       </button>
     }
+    -->
   </label>
   <label class="field">
     Buyer status

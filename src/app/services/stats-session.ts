@@ -58,6 +58,7 @@ export class StatsSession {
   constructor(private readonly fetchStats: FetchStats) {}
 
   // suggested min plat = a bit under the middle price of this tab's items
+  // not shown in the ui for now (WIP)
   suggestedMin(unranked: boolean): number | null {
     const prices = this.stats().flatMap(({ ranks }) => {
       const r = unranked ? unrankedOf(ranks) : bestRank(ranks);
