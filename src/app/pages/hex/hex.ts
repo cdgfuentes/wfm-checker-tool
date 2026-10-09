@@ -11,7 +11,7 @@ import { HEX_ITEMS } from '../../data/hex';
   `,
   styles: `
     .sub {
-      color: #666;
+      color: #888;
       margin-top: 0;
     }
   `,

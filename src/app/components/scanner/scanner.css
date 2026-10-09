@@ -1,5 +1,5 @@
 .sub {
-  color: #666;
+  color: #888;
   margin-top: 0;
 }
 .controls {
@@ -28,14 +28,14 @@ button.link {
   padding: 0;
   border: 0;
   background: none;
-  color: #3b6ff5;
+  color: #4d8cff;
   font-size: 0.8rem;
   text-align: left;
   text-decoration: underline;
   cursor: pointer;
 }
 button.secondary {
-  background: #eee;
+  background: transparent;
 }
 progress {
   width: 100%;
@@ -51,14 +51,14 @@ th,
 td {
   text-align: left;
   padding: 0.4rem 0.6rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #333;
 }
 .dot {
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: #2a9d4b;
+  background: #3cb371;
   margin-left: 0.25rem;
 }
 .whisper {
@@ -69,12 +69,12 @@ td {
 }
 .whisper code {
   flex: 1;
-  background: #f3f3f3;
+  background: #2a2a2a;
   padding: 0.5rem;
   border-radius: 4px;
   overflow-wrap: anywhere;
 }
 .errors {
   margin: 1rem 0;
-  color: #a33;
+  color: #e66;
 }

@@ -43,8 +43,6 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Cloudflare local dev cache
-/.wrangler
 
 # Vercel local link
 /.vercel

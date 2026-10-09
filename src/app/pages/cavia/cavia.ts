@@ -21,7 +21,7 @@ import { CAVIA_ITEMS, MELEE_ARCANE, NECRAMECH_MOD } from '../../data/cavia';
   `,
   styles: `
     .sub {
-      color: #666;
+      color: #888;
       margin-top: 0;
     }
   `,

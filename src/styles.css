@@ -1,9 +1,12 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
+  background: #1a1a1a;
+  color: #ddd;
+  color-scheme: dark;
 }
 
-/* Form controls shared by every tab (including projected filters). */
+/* form stuff every tab uses */
 .field {
   display: flex;
   flex-direction: column;
@@ -15,6 +18,12 @@ input,
 button {
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
+  background: #2a2a2a;
+  color: #ddd;
+  border: 1px solid #444;
+}
+button {
+  cursor: pointer;
 }
 input[type='number'] {
   width: 6rem;

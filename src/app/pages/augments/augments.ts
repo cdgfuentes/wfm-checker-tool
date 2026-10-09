@@ -25,7 +25,7 @@ import { SYNDICATE_NAMES, Syndicate } from '../../models/item.model';
   `,
   styles: `
     .sub {
-      color: #666;
+      color: #888;
       margin-top: 0;
     }
   `,

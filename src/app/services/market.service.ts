@@ -99,7 +99,7 @@ export class MarketService {
         return await this.getJson(url, signal, false);
       }
       if (!resp.ok) {
-        // the worker says why it 502'd in plain text, show that. skip html pages tho
+        // the proxy says why it 502'd in plain text, show that. skip html pages tho
         const isText = resp.headers.get('content-type')?.startsWith('text/plain');
         const why = isText ? (await resp.text().catch(() => '')).slice(0, 120) : '';
         throw new Error(why ? `HTTP ${resp.status}: ${why}` : `HTTP ${resp.status}`);
