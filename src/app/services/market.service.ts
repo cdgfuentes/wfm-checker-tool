@@ -98,7 +98,12 @@ export class MarketService {
         await sleep(RETRY_DELAY_MS);
         return await this.getJson(url, signal, false);
       }
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      if (!resp.ok) {
+        // the worker says why it 502'd in plain text, show that. skip html pages tho
+        const isText = resp.headers.get('content-type')?.startsWith('text/plain');
+        const why = isText ? (await resp.text().catch(() => '')).slice(0, 120) : '';
+        throw new Error(why ? `HTTP ${resp.status}: ${why}` : `HTTP ${resp.status}`);
+      }
       if (!resp.headers.get('content-type')?.includes('json')) {
         // got index.html back so /api isn't being proxied (restart ng serve? ambot)
         throw new Error("proxy isn't running, restart ng serve");
