@@ -1,5 +1,7 @@
 # wfm-checker-tool
 
+<p align="center"><img src="docs/mesa-plat.gif" width="400" alt="mesa chilling in a pile of platinum"></p>
+
 small angular app i made so I can turn syndicate standing into plat. it checks warframe.market for people buying the stuff syndicates sell, then gives you the whisper to copy paste in game.
 
 ## what it does
@@ -77,6 +79,7 @@ this app is only possible because of these, tttthank you!!
 | the game              | Digital Extremes    | https://www.warframe.com                        | Warframe itself                               |
 | framework             | Angular             | https://angular.dev                             | the whole app                                 |
 | hosting               | Vercel              | https://vercel.com                              | hosting + the proxy                           |
+| readme gif            | warframestuff       | https://www.tumblr.com/warframestuff/812198127218180096 | the mesa plat gif up top                  |
 
 am not affiliated with or endorsed by warframe.market or DE
 Warframe and everything in it belongs to Digital Extremes
