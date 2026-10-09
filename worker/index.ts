@@ -5,6 +5,10 @@
 const ORDERS = /^v2\/orders\/item\/[a-z0-9_]+\/top$/;
 const STATS = /^v1\/items\/[a-z0-9_]+\/statistics$/;
 
+// tell them who we are, default worker traffic gets blocked a lot (I THINK?)
+const USER_AGENT =
+  'wfm-checker-tool (personal project, https://github.com/cdgfuentes/wfm-checker-tool)';
+
 // orders can have an optional ?rank=N, stats take no query at all
 const ORDERS_QUERY = /^(\?rank=\d{1,2})?$/;
 
@@ -27,7 +31,7 @@ export default {
     let upstream: Response;
     try {
       upstream = await fetch(`https://api.warframe.market/${path}${search}`, {
-        headers: { Platform: 'pc', Accept: 'application/json' },
+        headers: { Platform: 'pc', Accept: 'application/json', 'User-Agent': USER_AGENT },
         // only cache good replies, never an error or a bot check page
         cf: { cacheTtlByStatus: { '200-299': ttl, '300-599': 0 }, cacheEverything: true },
       } as RequestInit);
@@ -36,8 +40,10 @@ export default {
     }
 
     // a cloudflare bot check comes back as html, dont pass that along as json
-    if (!upstream.headers.get('content-type')?.includes('json')) {
-      return new Response('bad upstream', { status: 502 });
+    const type = upstream.headers.get('content-type') ?? 'no content-type';
+    if (!type.includes('json')) {
+      // show what we got back, way easier to debug
+      return new Response(`bad upstream: HTTP ${upstream.status}, ${type}`, { status: 502 });
     }
 
     return new Response(upstream.body, {
